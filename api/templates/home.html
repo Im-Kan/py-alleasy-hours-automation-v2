@@ -94,6 +94,7 @@
       </div>
     </div>
   </body>
+  <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
   <script>
 
     function pad(d) {
@@ -112,7 +113,7 @@
       return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result);
+        reader.onload = () => resolve(reader.result.split(',')[1]);
         reader.onerror = error => reject(error);
       });
     }
@@ -127,9 +128,26 @@
       var base64file = await getBase64(rawFile);
       console.log({name, date});
 
+      resultBase64 = ""
       //----------Fazer request pra API---------.then
+      await $.ajax({
+        url : 'convert/',
+        //csrfmiddlewaretoken : csrf_token, // from the template
+        type : 'POST',
+        data : {
+        'base64' : base64file,
+        'name':name,
+        'date':date
+        },
+          success : (data)=>{resultBase64 = data} // reference to function below:
+      })
 
-      const blob = base64ToBlob(base64file.split(','[1]), 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+      if(resultBase64 == "") {
+        alert("deu erro kkk af")
+        return
+      }
+
+      const blob = base64ToBlob(resultBase64, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
       console.log('aq')
       const blobUrl = URL.createObjectURL(blob);
 
@@ -148,7 +166,7 @@
     });
 
     function base64ToBlob(base64, mimeType = '') {
-      const byteCharacters = window.atob(base64[0].split(',')[1]);
+      const byteCharacters = window.atob(base64);
       const byteNumbers = Array.from(byteCharacters).map(char => char.charCodeAt(0));
       const byteArray = new Uint8Array(byteNumbers);
       return new Blob([byteArray], {type: mimeType});
