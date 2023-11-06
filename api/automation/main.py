@@ -26,6 +26,7 @@ def generateAlleasyExcel(data):
 
     alleasy.set_data(ws_alleasy, mes, ano, dias_no_mes)
     alleasy.set_horas(ws_alleasy, calendar_te, dias_no_mes)
+    alleasy.set_nome(ws_alleasy, data["name"])
 
     bytes_io = BytesIO()
 

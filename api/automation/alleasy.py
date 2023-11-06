@@ -19,6 +19,10 @@ def set_horas(ws, calendar_hashmap, dias_do_mes):
         print(n, ' ', dia, "=>", obs)
 
 
+def set_nome(ws, nome):
+    ws['B2'].value = nome
+
+
 def fill_work(ws, n, obs):
     fill_white(ws, n, obs)
     hora = time(8, 0, 0)
@@ -78,3 +82,4 @@ def fill_white(ws, n, obs):
     #     obs = calendar_hashmap[dia]
     #     ws['P'+n.__str__()].value = obs
     #     print(dia, "=>", obs)
+
