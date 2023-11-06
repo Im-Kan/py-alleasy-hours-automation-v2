@@ -73,6 +73,12 @@
     input, select {
       color: #008879 !important;
     }
+    select option {
+      margin: 40px;
+      background: rgba(0, 0, 0, 0.75);
+      color: #fff;
+      text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+    }
   </style>
   <body onload="initialize();">
     <h1 class="title">Automação planilhas AllEasy</h1>
@@ -187,7 +193,11 @@
         'name':name,
         'date':date
         },
-          success : (data)=>{resultBase64 = data} // reference to function below:
+          success : (data)=>{resultBase64 = data},
+          error: (data)=>{
+            alert("deu erro kkk af, ve nos logs oq deu");
+            console.log(data);
+          }
       })
 
       if(resultBase64 == "") {
