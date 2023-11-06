@@ -143,7 +143,7 @@
         <div class="images">
           <img src="https://raw.githubusercontent.com/Im-Kan/py-alleasy-hours-automation-v2/main/assets/img1.png" />
         </div>
-        6. Colocar seu nome completo no campo e data;
+        6. Colocar seu nome completo no campo e data; <br/>
         7. Após clicar em executar automação, basta aguardar alguns segundos e clicar no botão de download que aparecerá.
       </div>
     </div>
@@ -178,6 +178,7 @@
       const rawFile = document.getElementById('fileInput').files[0];
       const name = document.getElementById('name').value;
       const date = document.getElementById('month').value + '/' + document.getElementById('year').value;
+      const month = document.getElementById('month').value;
 
       var base64file = await getBase64(rawFile);
       console.log({name, date});
@@ -215,13 +216,26 @@
         const a = document.createElement('a');
         a.style.display = 'none';
         a.href = blobUrl;
-        a.download = 'planilha-de-horas.xlsx';
-
+        a.download = `${obtainMonth(month)}_Horas_${cleanString(name)}.xlsx`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
       });
     });
+
+    function cleanString(inputString) {
+    let replacedString = inputString.replace(/\s+/g, '_');
+    let cleanedString = replacedString.replace(/[^A-Za-z_]+/g, '');
+    return cleanedString;
+
+    function obtainMonth(numero_mes) {
+    nomes_meses = [
+      'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+      'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+    ]
+    return nomes_meses[numero_mes-1];
+  }
+}
 
     function base64ToBlob(base64, mimeType = '') {
       const byteCharacters = window.atob(base64);
