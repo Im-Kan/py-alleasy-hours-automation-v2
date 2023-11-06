@@ -227,6 +227,7 @@
     let replacedString = inputString.replace(/\s+/g, '_');
     let cleanedString = replacedString.replace(/[^A-Za-z_]+/g, '');
     return cleanedString;
+    }
 
     function obtainMonth(numero_mes) {
     nomes_meses = [
@@ -234,8 +235,7 @@
       'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
     ]
     return nomes_meses[numero_mes-1];
-  }
-}
+    }
 
     function base64ToBlob(base64, mimeType = '') {
       const byteCharacters = window.atob(base64);
