@@ -26,11 +26,16 @@
       align-items: center;
     }
     .tutorial-txt {
-      max-width: 550px;
+      max-width: 800px;
+      width: 100vw;
       padding: 25px;
     }
     .images {
       padding: 20px;
+    }
+    .images img{
+      max-width: 80vw;
+      max-height: 400px;
     }
     .hidden {
       display: none;
@@ -46,6 +51,21 @@
     }
     .submit {
       cursor: pointer;
+    }
+    .credits-txt{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .credits-txt a {
+      margin: 1px;
+      font-family: 'Courier New', monospace !important;
+      text-decoration: none;
+      color: #ffd592 !important;
+    }
+    .credits-txt a img {
+      margin-bottom: -3px;
     }
     img {
       object-fit: contain;
@@ -80,24 +100,45 @@
       </form>
 
       <button id="downloadButton", class="download hidden">Baixar planilha</button>
+      <br/>
+      <div class="credits-txt"><a>Desenvolvido por:</a>
+        <a href="https://www.linkedin.com/in/gabriel-campera/">
+          Gabriel Campera
+          <img width="15" src="https://cdn1.iconfinder.com/data/icons/logotypes/32/circle-linkedin-512.png"/></a>
+         <a>&</a>
+        <a href="https://www.linkedin.com/in/gsdutra/">
+          Gabriel Dutra
+          <img width="15" src="https://cdn1.iconfinder.com/data/icons/logotypes/32/circle-linkedin-512.png"/></a>
+      </div>
 
       <div class="tutorial-txt">
-        <h2>Como utilizar:</h2> <br />
-        1. Baixar o excel do Times Explorer que é exportado no 7pacetimetracker
-        (Plugin do devops);
+        <h3>Como utilizar:</h3> <br />
+        1. Acessar o Times Explorer do 7pacetimetracker na seguinte aba:
         <div class="images">
-          <img width="200" src="https://i.ibb.co/936mC9M/img0.png" />
-          <img width="470" src="https://i.ibb.co/cgF10SN/img1.png" />
+          <img src="https://raw.githubusercontent.com/Im-Kan/py-alleasy-hours-automation-v2/main/assets/img0.png" />
         </div>
-
         2. Verificar se está pegando a data correta:
-
+        <div class="images">
+          <img src="https://raw.githubusercontent.com/Im-Kan/py-alleasy-hours-automation-v2/main/assets/img3.png" />
+        </div>
         3. Verificar se a planilha contém exatamente as colunas abaixo nessa ordem:
-
+        <div class="images">
+          <img src="https://raw.githubusercontent.com/Im-Kan/py-alleasy-hours-automation-v2/main/assets/img2.png" />
+        </div>
         4. Caso contrário, alterar da seguinte forma:
-
-        5. Colocar seu nome completo no campo e data; <br />
-        6. Após clicar em executar automação, basta aguardar alguns segundos e clicar no botão de download que aparecerá.
+        <div class="images">
+          <img src="https://raw.githubusercontent.com/Im-Kan/py-alleasy-hours-automation-v2/main/assets/img4.png" />
+          <br/><br/>
+          - Tirar todas as colunas e colocar somente as necessárias (date, title, activity type, hours)
+          <br/><br/>
+          <img src="https://raw.githubusercontent.com/Im-Kan/py-alleasy-hours-automation-v2/main/assets/img5.png" />
+        </div>
+        5. Após conferir que está tudo certo, baixar o excel:
+        <div class="images">
+          <img src="https://raw.githubusercontent.com/Im-Kan/py-alleasy-hours-automation-v2/main/assets/img1.png" />
+        </div>
+        6. Colocar seu nome completo no campo e data;
+        7. Após clicar em executar automação, basta aguardar alguns segundos e clicar no botão de download que aparecerá.
       </div>
     </div>
   </body>
