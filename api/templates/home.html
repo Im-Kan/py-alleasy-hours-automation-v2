@@ -27,14 +27,18 @@
     }
     .tutorial-txt {
       max-width: 800px;
-      width: 100vw;
+      width: 96%;
+      padding: 2%;
       padding: 25px;
     }
     .images {
       padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
     }
     .images img{
-      max-width: 80vw;
+      max-width: 80%;
       max-height: 400px;
     }
     .hidden {
@@ -51,6 +55,14 @@
     }
     .submit {
       cursor: pointer;
+      transition: .3s;
+      border: none;
+      border-radius: 100px;
+      padding: 10px 15px 10px 15px;
+    }
+    .submit:hover{
+      transition: .3s;
+      transform: scale(1.05);
     }
     .credits-txt{
       display: flex;
