@@ -18,7 +18,7 @@ def generateAlleasyExcel(data):
     wk_devops = load_workbook(devops_file)
     ws_devops = wk_devops.active
 
-    alleasy_file = glob("/home/gsdutra/py-alleasy-hours-automation-v2/api/automation/alleasy_model_excel/*.xlsx")[0]
+    alleasy_file = glob("./api/automation/alleasy_model_excel/*.xlsx")[0]
     wk_alleasy = load_workbook(alleasy_file)
     ws_alleasy = wk_alleasy.active
 

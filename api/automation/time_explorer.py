@@ -24,7 +24,7 @@ def get_calendar_hashmap(ws):
         if cur is None:
             calendar_hashmap[data] = title_cell
         else:
-            calendar_hashmap[data] = cur + " | " + title_cell
+            calendar_hashmap[data] = str(cur) + " | " + str(title_cell)
         n = n+1
     return calendar_hashmap
 
