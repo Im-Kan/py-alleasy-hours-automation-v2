@@ -22,10 +22,10 @@ def generateAlleasyExcel(data):
     wk_alleasy = load_workbook(alleasy_file)
     ws_alleasy = wk_alleasy.active
 
-    calendar_te = time_explorer.get_calendar_hashmap(ws_devops)
+    (calendar_te,hour_hashmap) = time_explorer.get_calendar_hashmap(ws_devops)
 
     alleasy.set_data(ws_alleasy, mes, ano, dias_no_mes)
-    alleasy.set_horas(ws_alleasy, calendar_te, dias_no_mes)
+    alleasy.set_horas(ws_alleasy, calendar_te, dias_no_mes,hour_hashmap)
     alleasy.set_nome(ws_alleasy, data["name"])
 
     bytes_io = BytesIO()

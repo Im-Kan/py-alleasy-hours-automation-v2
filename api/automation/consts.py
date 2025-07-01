@@ -42,3 +42,5 @@ def obter_nome_mes(numero_mes):
     ]
     nome_mes = nomes_meses[numero_mes - 1]
     return nome_mes.capitalize()
+
+letters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','P','Q','R','S','T','U','V','W','X','Y','Z']
