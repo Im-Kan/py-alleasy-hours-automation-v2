@@ -96,12 +96,18 @@
     <h1 class="title">Automação planilhas AllEasy</h1>
     <div class="main">
       <form id="myForm">
-        <label for="fileInput">Xlsx do times explorer:</label>
-        <input required type="file" id="fileInput" name="fileInput" accept=".xls,.xlsx" /><br /><br />
+        <label>Fonte dos dados:</label><br />
+        <label><input type="radio" name="mode" value="api" checked onchange="toggleMode()" /> 7pace API (automático)</label>
+        <label style="margin-left:15px"><input type="radio" name="mode" value="excel" onchange="toggleMode()" /> Upload Excel (manual)</label>
+        <br /><br />
+
+        <div id="excelInput" style="display:none">
+          <label for="fileInput">Xlsx do times explorer:</label>
+          <input type="file" id="fileInput" name="fileInput" accept=".xls,.xlsx" /><br /><br />
+        </div>
 
         <label for="name">Nome completo:</label><br />
-        <input required type="text" id="name" name="name"></textarea
-        ><br /><br />
+        <input required type="text" id="name" name="name" /><br /><br />
 
         <label for="month">Mês:</label>
         <select class="month" id="month" name="selectField">
@@ -194,6 +200,20 @@
       });
     };
 
+    function toggleMode() {
+      const mode = document.querySelector('input[name="mode"]:checked').value;
+      const excelDiv = document.getElementById('excelInput');
+      const fileInput = document.getElementById('fileInput');
+      if (mode === 'excel') {
+        excelDiv.style.display = 'block';
+        fileInput.required = true;
+      } else {
+        excelDiv.style.display = 'none';
+        fileInput.required = false;
+        fileInput.value = '';
+      }
+    }
+
     async function getBase64(file) {
       return new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -206,28 +226,27 @@
     let form = document.getElementById("myForm");
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const rawFile = document.getElementById('fileInput').files[0];
+      const mode = document.querySelector('input[name="mode"]:checked').value;
       const name = document.getElementById('name').value;
       const date = document.getElementById('month').value + '/' + document.getElementById('year').value;
       const month = document.getElementById('month').value;
 
-      var base64file = await getBase64(rawFile);
-      console.log({name, date});
+      let postData = { 'mode': mode, 'name': name, 'date': date };
+
+      if (mode === 'excel') {
+        const rawFile = document.getElementById('fileInput').files[0];
+        if (!rawFile) { alert("Selecione o arquivo xlsx"); return; }
+        postData['base64'] = await getBase64(rawFile);
+      }
 
       resultBase64 = ""
-      //----------Fazer request pra API---------.then
       await $.ajax({
         url : 'convert/',
-        //csrfmiddlewaretoken : csrf_token, // from the template
         type : 'POST',
-        data : {
-        'base64' : base64file,
-        'name':name,
-        'date':date
-        },
+        data : postData,
           success : (data)=>{resultBase64 = data},
           error: (data)=>{
-            alert("deu erro kkk af, ve nos logs oq deu");
+            alert("Erro: " + (data.responseText || "verifique os logs"));
             console.log(data);
           }
       })

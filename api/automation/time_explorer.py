@@ -65,3 +65,69 @@ def trim(string):
         return string[1:]
     else:
         return string
+
+
+def get_calendar_hashmap_from_api(rows):
+    """Same logic as get_calendar_hashmap but from API data instead of xlsx."""
+    calendar_hashmap = {}
+    hours_hashmap = {}
+
+    for row in rows:
+        date_str = row['date']
+        if not date_str:
+            continue
+        # date comes as "2026-02-15" or similar
+        parts = date_str.split('-')
+        data = int(parts[2].lstrip('0') or '0')
+
+        title = row['title']
+        activity_type = row['activity_type']
+        comment = row['comment']
+        hours = row['hours']
+
+        cur_hour = hours_hashmap.get(data, 0)
+        hours_hashmap[data] = cur_hour + hours
+
+        if title in list_not_fit:
+            continue
+        if activity_type == "Reunião" and comment:
+            add_to_dict(calendar_hashmap, data, comment)
+        elif activity_type in activity_types:
+            add_to_dict(calendar_hashmap, data, activity_type)
+        else:
+            add_to_dict(calendar_hashmap, data, title)
+
+    return (calendar_hashmap, hours_hashmap)
+
+
+
+def get_calendar_hashmap_from_api(rows):
+    """Same logic as get_calendar_hashmap but from API data instead of xlsx."""
+    calendar_hashmap = {}
+    hours_hashmap = {}
+
+    for row in rows:
+        date_str = row['date']
+        if not date_str:
+            continue
+        parts = date_str.split('-')
+        data = int(parts[2].lstrip('0') or '0')
+
+        title = row['title']
+        activity_type = row['activity_type']
+        comment = row['comment']
+        hours = row['hours']
+
+        cur_hour = hours_hashmap.get(data, 0)
+        hours_hashmap[data] = cur_hour + hours
+
+        if title in list_not_fit:
+            continue
+        if activity_type == "Reunião" and comment:
+            add_to_dict(calendar_hashmap, data, comment)
+        elif activity_type in activity_types:
+            add_to_dict(calendar_hashmap, data, activity_type)
+        else:
+            add_to_dict(calendar_hashmap, data, title)
+
+    return (calendar_hashmap, hours_hashmap)
