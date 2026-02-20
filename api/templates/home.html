@@ -109,9 +109,6 @@
 
         <label for="year">Ano:</label>
         <select id="year" name="year">
-          <option value="2023">2023</option>
-          <option value="2024">2024</option>
-          <option value="2025">2025</option>
         </select><br /><br />
 
         <input class="submit" type="submit" value="Submit" />
@@ -159,6 +156,28 @@
         7. Após clicar em executar automação, basta aguardar alguns segundos e clicar no botão de download que aparecerá.
       </div> -->
     </div>
+
+  <script>
+    let yearElement = document.getElementById("year")
+    const now = new Date();
+    let currentYear = now.getFullYear()
+    console.log(currentYear)
+    for(let i=(currentYear-1); i<=(currentYear+1); i++){
+      const option = document.createElement("option");
+      option.value = i;
+      option.textContent = i;
+
+      if (i === currentYear) {
+        option.selected = true;
+      }
+
+      yearElement.appendChild(option);
+    }
+
+
+
+
+  </script>
   </body>
   <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
   <script>
